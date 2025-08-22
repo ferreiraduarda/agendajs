@@ -1,0 +1,123 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(120deg, #f1f1f1, #e0e0e0);
+    padding: 40px;
+    color: #333;
+}
+
+.formulario {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+h1 {
+    text-align: center;
+    color: #075772c2;
+    margin-bottom: 30px;
+}
+
+input[type="text"],
+input[type="date"] {
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #075772c2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #08a396;
+}
+
+#lista-de-tarefas {
+   margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+#lista-de-tarefas div {
+    background-color: #ffffff;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-left: 5px solid #054b4b;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-tarefa {
+    width: 220px;
+    min-height: 120px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.card-tarefa p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #054b4b;
+}
+
+.card-tarefa .data {
+    font-size: 14px;
+    color: #043d3d;
+    margin-bottom: 10px;
+}
+
+.card-tarefa button {
+    background-color: #075772c2;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card-tarefa button:hover {
+    background-color: #08a396;
+}
+
+#lista-de-tarefas button {
+    background-color: #075772c2;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#lista-de-tarefas button:hover {
+    background-color: #08a396;
+}

@@ -5,14 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda</title>
+    <link rel="stylesheet" href="agenda.css">
 </head>
 
 <body>
     <h1>Lista de Tarefas</h1>
-    <input id="tarefa" type="text" placeholder="Insira aqui sua tarefa"></input>
+    <div class="formulario"><input id="tarefa" type="text" placeholder="Insira aqui sua tarefa" autocomplete="off"></input>
     <input id="seleciona-data" type="date" />
-    <button onclick="adicionarTarefa()">Adicionar Tarefa</button>
+    <button onclick="adicionarTarefa()">Adicionar Tarefa</button></div>
     <div id="lista-de-tarefas"></div>
+    <div id="mensagem-erro" style="color: red; text-align: center; margin-top: 10px;"></div>
 
     <script>
         let afazeres;
@@ -29,21 +31,6 @@
                 data: "15-08-2025",
                 id: "id1"
 
-            },
-            {
-                nome: "Lavar banheiro",
-                data: "20-08-2025",
-                id: "id2"
-            },
-            {
-                nome: "Estender roupa",
-                data: "25-08-2025",
-                id: "id3"
-            },
-            {
-                nome: "Assistir jogo do São Paulo",
-                data: "16-08-2025",
-                id: "id4"
             }
            
         ]};
@@ -54,10 +41,18 @@
 
         let adicionarTarefa = () => {
             const campoTarefa = document.getElementById("tarefa");
-            const tarefa = campoTarefa.value;
+            const tarefa = campoTarefa.value.trim();
 
             const campoData = document.getElementById("seleciona-data");
             const prazo = campoData.value;
+
+            const mensagemErro = document.getElementById("mensagem-erro");
+            mensagemErro.innerText = "";
+
+            if (tarefa === "" || prazo === "") {
+            mensagemErro.innerText = "Por favor, insira uma tarefa e uma data válidas.";
+            return;
+    }
 
             const cron = "" + new Date().getTime();
 
@@ -69,6 +64,11 @@
            
             salvarTarefas();
             renderizar();
+
+            campoTarefa.value = "";
+            campoData.value = "";
+
+            mensagemErro.innerText = "";
         }
         let apagarTarefa = (evento) => {
             const botaoApagar = evento.target;
@@ -83,28 +83,40 @@
             });
             salvarTarefas();    
             renderizar();
+
         };    
 
         let renderizar = () => {
             document.getElementById("lista-de-tarefas").innerHTML = "";
+            afazeres.sort((a, b) => new Date(a.data) - new Date(b.data));
+
             afazeres.forEach(
                 (tarefa) => {
                     const elemento = document.createElement("div");
-                    elemento.innerHTML = tarefa.nome + " " + tarefa.data;
+                    elemento.classList.add("card-tarefa");
+
+                    const dataFormatada = tarefa.data.split("-").reverse().join("/");
+
+                    const nomeTarefa = document.createElement("p");
+                    nomeTarefa.innerText = tarefa.nome;
+
+                    const dataTarefa = document.createElement("span");
+                    dataTarefa.innerText = dataFormatada;
+                    dataTarefa.classList.add("data");
 
                     const botaoApagar = document.createElement("button");
-                    botaoApagar.innerText = "Apagar"
-                    botaoApagar.style = "margin-left: 12px;"
+                    botaoApagar.innerText = "Apagar";
                     botaoApagar.id = tarefa.id;
                     botaoApagar.onclick = apagarTarefa;
-                    elemento.appendChild( botaoApagar);
+
+                    elemento.appendChild(nomeTarefa);
+                    elemento.appendChild(dataTarefa);
+                    elemento.appendChild(botaoApagar);
 
                     const listaDeTarefas = document.getElementById("lista-de-tarefas");
                     listaDeTarefas.appendChild(elemento);
-                }
-            );
-
-        }
+                });
+            }
 
         renderizar();
     </script>
